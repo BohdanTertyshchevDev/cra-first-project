@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import ToDOList from './components/ToDoList/ToDoList';
-//import Aloha from './components/Aloha/Aloha';
-//import AlohaDashboard from './components/AlohaDashboard/AlohaDashboard';
+// import Counter from './components/Counter/Counter';
+import CounterPage from './components/Counter/CounterPage';
+// import Scene from './components/Scene/Scene';
+// import ToDOList from './components/ToDoList/ToDoList';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <ToDOList />
+    <CounterPage />
     
 );
 
