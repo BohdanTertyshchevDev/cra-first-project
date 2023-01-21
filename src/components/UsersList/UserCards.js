@@ -5,7 +5,7 @@ function UserCards(props) {
 
     return (
         <div className='card-wrapper'>
-            <img src={imgSrc} className="user-img"></img>
+            <img src={imgSrc} alt={`${firstName} ${lastName}`} className="user-img"></img>
             <h1>{firstName} {lastName}</h1>
             <p>{email}</p>
         </div>

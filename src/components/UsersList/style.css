@@ -1,0 +1,25 @@
+.card-wrapper {
+    width:  320px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction:  column;
+    justify-content:  center;
+    align-items: center;
+    margin: 10px;
+}
+
+.card-wrapper h1 {
+    text-align: center;
+}
+
+.user-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.card-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
