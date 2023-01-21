@@ -1,0 +1,23 @@
+.form-wrapper {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.form-wrapper label {
+    margin: 10px;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.valid {
+    border: 2px solid green;
+}
+
+.invalid {
+    border: 2px solid red;
+}
