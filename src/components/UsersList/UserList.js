@@ -9,7 +9,8 @@ class UserList extends React.Component {
         super(props);
 
         this.state = {
-            users: []
+            users: [],
+            filteredUsers: []
         }
     }
 
@@ -23,10 +24,30 @@ class UserList extends React.Component {
         });
     }
 
+    handlSearch = (event) => {
+        if(event.target.value === "") {
+            this.setState({
+                filteredUsers:  []
+            })
+            return;
+        }
+
+        const filteredUsers = this.state.users.filter(
+            (user) => 
+            {return user.name.last.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1}
+        )
+
+        this.setState({
+            filteredUsers
+        })
+    }
+
 
     renderUsers = () => {
-        const {users} = this.state;
-        return users.map((user) => <UserCards users={user}/>)
+        const {users, filteredUsers} = this.state;
+        return filteredUsers.length > 0
+        ? filteredUsers.map((user) => <UserCards users={user}/>)
+        : users.map((user) => <UserCards users={user}/>)
     }
 
     render() {
@@ -35,6 +56,14 @@ class UserList extends React.Component {
             <>
             <ul>
             <h1>USERS</h1>
+
+            <input
+            type="text"
+            autoComplete="off"
+            placeholder="Поиск юзера по фамилии"
+            onChange={this.handlSearch}
+            />
+
             <section className="card-container">
                 {users.length ? this.renderUsers() : <h2>Пользователи еще не загрузились</h2>}
             </section>

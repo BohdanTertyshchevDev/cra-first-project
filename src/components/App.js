@@ -1,8 +1,8 @@
-import SignInForm from "./SignInForm";
+import UserList from "./UsersList/UserList";
 
 function App() {
     return(
-        <SignInForm/>
+        <UserList/>
     )
 }
 
