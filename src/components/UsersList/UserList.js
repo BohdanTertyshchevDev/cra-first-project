@@ -10,12 +10,13 @@ class UserList extends React.Component {
 
         this.state = {
             users: [],
-            filteredUsers: []
+            filteredUsers: [],
+            userCount: 100
         }
     }
 
     componentDidMount() {
-        getUsers().then((data) => {
+        getUsers(this.state.userCount).then((data) => {
             const {results} = data;
             this.setState({
                 users: results
@@ -42,12 +43,28 @@ class UserList extends React.Component {
         })
     }
 
+    setUserCount = (event) => {
+        this.setState({
+            userCount: event.target.value
+        })
+    } 
+
+
+    loadUsers = (event) => {
+        getUsers(this.state.userCount).then((data) => {
+            const {results} = data;
+            this.setState({
+                users: results
+            })
+        });
+    }
+
 
     renderUsers = () => {
         const {users, filteredUsers} = this.state;
         return filteredUsers.length > 0
-        ? filteredUsers.map((user) => <UserCards users={user}/>)
-        : users.map((user) => <UserCards users={user}/>)
+        ? filteredUsers.map((user) => <UserCards key={user.login.uuid} users={user}/>)
+        : users.map((user) => <UserCards key={user.login.uuid} users={user}/>)
     }
 
     render() {
@@ -56,7 +73,13 @@ class UserList extends React.Component {
             <>
             <ul>
             <h1>USERS</h1>
-
+            <input
+            type="number"
+            min={1}
+            max={100}
+            onChange={this.setUserCount}
+            />
+            <button onClick={this.loadUsers}>Загрузить юзеров</button>
             <input
             type="text"
             autoComplete="off"
