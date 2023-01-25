@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import './style.css';
 import styles from './ToDoFormStyle.module.css';
+import cx from 'classnames';
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class ToDoForm extends Component {
     render() {
         const {todo, isInputValid} = this.state;
 
-        cx({
+        const cNameString = cx({
             [styles.input]: true,
             [styles['invalid-input']]:!isInputValid
         })
@@ -44,7 +45,7 @@ class ToDoForm extends Component {
                 name="todo" 
                 value={todo}
                 onChange={this.changeHendler}
-                // className={className}
+                className={cNameString}
                 />
                 <button type="submit">Submit</button>
             </form>
@@ -55,9 +56,3 @@ class ToDoForm extends Component {
 export default ToDoForm;
 
 
-function cx (objectClassNames) {
-    const cort = Object.entries(objectClassNames);
-    const filtered = cort.filter((className, condition) => condition);
-    const arr = filtered.map((className, condition) => className);
-    arr.join(' ');
-}
