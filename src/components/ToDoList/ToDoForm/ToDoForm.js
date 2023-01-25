@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+// import './style.css';
+import styles from './ToDoFormStyle.module.css';
 
 class ToDoForm extends Component {
     constructor(props) {
@@ -22,7 +24,7 @@ class ToDoForm extends Component {
     render() {
         const {todo} = this.state;
         return (
-            <form onSubmit={this.submitHendler}>
+            <form onSubmit={this.submitHendler} className={styles.container}>
                 <input 
                 type="text" 
                 name="todo" 
