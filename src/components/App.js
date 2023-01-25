@@ -1,8 +1,8 @@
-import HelloParent from "./HelloForm/HelloParent";
+import ToDOList from "./ToDoList/ToDoList";
 
 function App() {
     return(
-        <HelloParent/>
+        <ToDOList/>
     )
 }
 
