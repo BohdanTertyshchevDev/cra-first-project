@@ -1,0 +1,67 @@
+$main-color: blue;
+$sm-size: 500px;
+$xl-size: 850px;
+
+%flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-between;
+
+    &:hover {
+        background-color: blue;
+    }
+}
+
+@mixin flex($fd, $jc, $ai) {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+.form {
+    @include flex(column, center, stretch);
+    border: 1px solid black;
+}
+
+.button {
+    @include flex(row, flex-start, ceneter)
+}
+
+.container {
+    @extend %flex-column;
+    color: $main-color;
+    display: flex;
+    font-size: 16px;
+
+    img {
+        width: 200px;
+        height: 300px;
+    }
+
+    &:hover {
+        background-color: blue;
+    }
+
+    @media screen and (max-width: $xl-size) {
+        & {
+            color: grey;
+        }
+    }
+}
+
+.text {
+    @extend %flex-column;
+    color: $main-color;
+}
+
+.wrapper {
+    @extend %flex-column;
+}
+
+@media screen and (max-width: $sm-size) {
+    h1 {
+        color: green;
+    }
+}
