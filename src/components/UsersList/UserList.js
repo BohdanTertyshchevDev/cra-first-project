@@ -4,6 +4,7 @@ import UserCards from "./UserCards";
 import './style.css'
 
 
+
 class UserList extends React.Component {
     constructor(props) {
         super(props);
@@ -11,18 +12,24 @@ class UserList extends React.Component {
         this.state = {
             users: [],
             filteredUsers: [],
-            userCount: 100
+            userCount: 15,
+            page: 1,
+            isLoading: true,
+            isError: false
         }
     }
 
     componentDidMount() {
-        getUsers(this.state.userCount).then((data) => {
-            const {results} = data;
-            this.setState({
-                users: results
-            })
-            console.log(results);
-        });
+        const {userCount, page} = this.state;
+        this.loadUsers(userCount, page);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        const {userCount, page} = this.state;
+        if(prevState.page !== page) {
+            this.loadUsers(userCount, page);
+        }
+
     }
 
     handlSearch = (event) => {
@@ -49,14 +56,37 @@ class UserList extends React.Component {
         })
     } 
 
+    prevButtonHendler = () => {
+        this.setState({
+            page: this.state.page > 1 ? this.state.page - 1 : this.state.page
+        })
+    }
 
-    loadUsers = (event) => {
-        getUsers(this.state.userCount).then((data) => {
+    nextButtonHendler = () => {
+        this.setState({
+            page: this.state.page + 1 
+        })
+    }
+
+
+    loadUsers = (userCount, page) => {
+        getUsers(userCount, page).then((data) => {
             const {results} = data;
             this.setState({
                 users: results
             })
-        });
+        })
+        .catch((error) => {
+            this.setState({
+                isError: true
+            })
+        })
+        .finally(() => {
+            this.setState({
+                isLoading: false
+            })
+        })
+        ;
     }
 
 
@@ -68,7 +98,7 @@ class UserList extends React.Component {
     }
 
     render() {
-        const {users} = this.state;
+        const {users, isError, isLoading} = this.state;
         return(
             <>
             <ul>
@@ -87,8 +117,15 @@ class UserList extends React.Component {
             onChange={this.handlSearch}
             />
 
+            <button onClick={this.prevButtonHendler}>Previous page</button>
+            <button onClick={this.nextButtonHendler}>Next page</button>
+
+
+            {isError && <h2>Произошла ошибка</h2>}
+            {isLoading && <h2>Пользователи еще не загрузились</h2>}
+
             <section className="card-container">
-                {users.length ? this.renderUsers() : <h2>Пользователи еще не загрузились</h2>}
+                {users.length ? this.renderUsers() : null}
             </section>
             </ul>
             </>
