@@ -1,8 +1,20 @@
-import List from "./List";
+import FlexContainer from "./FlexContainer";
 
 function App() {
     return(
-        <List/>
+        <>
+        <FlexContainer flexDirection='row' alignItems='stretch' justifyContent='center' backgroundColor='green'>
+            <div>Item1</div>
+            <div>Item2</div>
+            <div>Item3</div>
+        </FlexContainer>
+
+        <FlexContainer flexDirection='row' alignItems='stretch' justifyContent='center' backgroundColor='yellow'>
+            <div>Item1</div>
+            <div>Item2</div>
+            <div>Item3</div>
+        </FlexContainer>
+        </>
     )
 }
 
