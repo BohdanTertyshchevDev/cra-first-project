@@ -1,8 +1,11 @@
-import UserList from "./UsersList/UserList";
+
 
 function App() {
     return(
-        <UserList/>
+       <>
+        <button onClick={() => window.open('https://github.com/BohdanTertyshchevDev')}>Open</button>
+        <button onClick={() => window.close()}>Close</button>
+       </>
     )
 }
 
