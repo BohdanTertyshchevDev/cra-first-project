@@ -1,51 +1,31 @@
-import DataProvider from "./DataProvider";
-import PhoneLoader from "./PhoneLoader";
-import TVLoader from "./TVLoader";
+import React from "react";
+import Tree from "./Tree";
+import {MyContext} from'../contexts/userContext'
 
 
-function App() {
-    return(
-        <>
-        <DataProvider loadData={() =>{
-            return fetch('./phones.json')
-            .then((response) => response.json())}}>
-
-            {(state) => {
-                const {data, isLoading, isError} = state;
-                return (
-                    <>
-                    {isLoading && <div>Loading......</div>}
-                    {isError && <div>Error!</div>}
-                    <ul>
-                        {data.map((data, index) => 
-                            <li key={index}>{data.brand} {data.model}. Price: {data.price}</li>
-                        )}
-                    </ul>
-                    </>
-                );
-            }}
-       </DataProvider>
-       <DataProvider loadData={() =>{
-            return fetch('./tv.json')
-            .then((response) => response.json())}}>
-
-            {(state) => {
-                const {data, isLoading, isError} = state;
-                return (
-                    <>
-                    {isLoading && <div>Loading......</div>}
-                    {isError && <div>Error!</div>}
-                    <ul>
-                        {data.map((data, index) => 
-                            <li key={index}>АКЦИЯ!!!{data.brand} {data.model}. Price: {data.price}</li>
-                        )}
-                    </ul>
-                    </>
-                );
-            }}
-       </DataProvider>
-        </>
-    )
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: {
+                firstName: "John",
+                lastName: "Dou",
+                email: "ivanov@mail.com",
+                avatar: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F002%2F002%2F403%2Foriginal%2Fman-with-beard-avatar-character-isolated-icon-free-vector.jpg&imgrefurl=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fprofile-avatar&tbnid=MV9dWdy0ZY_UPM&vet=12ahUKEwi3mtOz6fP8AhVOwgIHHfBfCC8QMygDegUIARDkAQ..i&docid=j1o201ERqM1BVM&w=7973&h=7974&q=avatars&ved=2ahUKEwi3mtOz6fP8AhVOwgIHHfBfCC8QMygDegUIARDkAQ'
+            }
+        }
+    }
+    render() {
+        console.log(MyContext);
+        return(
+            <>
+            App
+            <MyContext.Provider value={this.state.user}>
+                <Tree />
+            </MyContext.Provider>
+            </>
+        )
+    }
 }
 
 export default App;
