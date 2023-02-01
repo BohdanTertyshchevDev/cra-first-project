@@ -1,21 +1,23 @@
 import React from 'react';
 import { MyContext } from '../../../../../contexts/userContext';
 
-const InnerChild = (props) => {
-    const {user: {firstName, lastName} = {}} = props;
+const InnerChild = () => {
     return (
         <MyContext.Consumer>
             {
-                (value) =>{
+                ({user, logOut}) =>{
                     return (
-                        <p>{JSON.stringify(value)}</p>
+                        <>
+                        <div style={{border: '3px solid black', padding: '25px'}}>
+                        <p>InnerChild</p>
+                        <p>{JSON.stringify(user)}</p>
+                        <button onClick={logOut}>Logout</button>
+                        </div>
+                        </>
                     )
                 }
             }
         </MyContext.Consumer>
-        // <div>
-        //     <p>{firstName} {lastName}</p>
-        // </div>
     );
 }
 
