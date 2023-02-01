@@ -1,0 +1,22 @@
+[
+    {
+        "brand": "Huawei",
+        "model": "P Smart",
+        "price": "100$"
+    },
+    {
+        "brand": "Samsung",
+        "model": "N458",
+        "price": "120$"
+    },
+    {
+        "brand": "Nokia",
+        "model": "4150",
+        "price": "500$"
+    },
+    {
+        "brand": "Redmi",
+        "model": "8note",
+        "price": "200$"
+    }
+]

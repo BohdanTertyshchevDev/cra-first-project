@@ -1,0 +1,22 @@
+[
+    {
+        "brand": "Samsung",
+        "model": "l598",
+        "price": "1000$"
+    },
+    {
+        "brand": "Sony",
+        "model": "N458",
+        "price": "1020$"
+    },
+    {
+        "brand": "Xiomi",
+        "model": "4150",
+        "price": "500$"
+    },
+    {
+        "brand": "Kivi",
+        "model": "hgg458",
+        "price": "200$"
+    }
+]

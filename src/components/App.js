@@ -1,51 +1,51 @@
-import AlohaDashboard from "./AlohaDashboard/AlohaDashboard";
-import UserList from "./UsersList/UserList";
-import CounterPage from "./Counter/CounterPage";
-import Scene from "./Scene/Scene";
-import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
+import DataProvider from "./DataProvider";
+import PhoneLoader from "./PhoneLoader";
+import TVLoader from "./TVLoader";
 
 
 function App() {
     return(
-        <BrowserRouter>
-        <ul>
-            <li><Link to="aloha">Go to Aloha</Link></li>
-            <li><Link to="users">Go to Users</Link></li>
-            <li><Link to="counter">Go to Counter</Link></li>
-            <li><Link to="scene">Go to Scene</Link></li>
-        </ul>
-        <Routes>
-            <Route index element={<Home/>} />
-            <Route path="/aloha" element={<AlohaDashboard/>} />
-            <Route path="/users" element={<UserList/>} />
-            <Route path="/counter" element={<CounterPage/>} />
-            <Route path="/scene" element={<Scene/>} />
+        <>
+        <DataProvider loadData={() =>{
+            return fetch('./phones.json')
+            .then((response) => response.json())}}>
 
-            <Route path="/*" element={<NotFound/>} />
-        </Routes>
-        </BrowserRouter>
+            {(state) => {
+                const {data, isLoading, isError} = state;
+                return (
+                    <>
+                    {isLoading && <div>Loading......</div>}
+                    {isError && <div>Error!</div>}
+                    <ul>
+                        {data.map((data, index) => 
+                            <li key={index}>{data.brand} {data.model}. Price: {data.price}</li>
+                        )}
+                    </ul>
+                    </>
+                );
+            }}
+       </DataProvider>
+       <DataProvider loadData={() =>{
+            return fetch('./tv.json')
+            .then((response) => response.json())}}>
+
+            {(state) => {
+                const {data, isLoading, isError} = state;
+                return (
+                    <>
+                    {isLoading && <div>Loading......</div>}
+                    {isError && <div>Error!</div>}
+                    <ul>
+                        {data.map((data, index) => 
+                            <li key={index}>АКЦИЯ!!!{data.brand} {data.model}. Price: {data.price}</li>
+                        )}
+                    </ul>
+                    </>
+                );
+            }}
+       </DataProvider>
+        </>
     )
 }
 
 export default App;
-
-const Home = () => {
-    return(
-        <>
-        <h1>Home page</h1>
-        <p>Lorem ipsum</p>
-        <p>Lorem ipsum</p>
-        <p>Lorem ipsum</p>
-        <p>Lorem ipsum</p>
-        </>
-    );
-};
-
-const NotFound = () => {
-    return(
-        <>
-        <h1>404 page not found</h1>
-        <p>Please try again</p>
-        </>
-    );
-};
