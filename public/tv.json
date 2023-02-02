@@ -1,22 +1,27 @@
 [
     {
-        "brand": "Samsung",
-        "model": "l598",
-        "price": "1000$"
+        "brand": "TVBRAND1",
+        "model": "1",
+        "price": "100$"
     },
     {
-        "brand": "Sony",
-        "model": "N458",
-        "price": "1020$"
+        "brand": "TVBRAND2",
+        "model": "2",
+        "price": "50$"
     },
     {
-        "brand": "Xiomi",
-        "model": "4150",
-        "price": "500$"
-    },
-    {
-        "brand": "Kivi",
-        "model": "hgg458",
+        "brand": "TVBRAND3",
+        "model": "3",
         "price": "200$"
+    },
+    {
+        "brand": "TVBRAND4",
+        "model": "4",
+        "price": "5000$"
+    },
+    {
+        "brand": "TVBRAND5",
+        "model": "5",
+        "price": "1000$"
     }
 ]

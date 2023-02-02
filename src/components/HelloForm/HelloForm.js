@@ -8,29 +8,29 @@ class HelloForm extends React.Component {
         }
     }
 
-    changeHendler = ({target: {value, name}}) => {
+    changeHandler = ({target: {value, name}}) => {
         this.setState({
-            [name] : value
+            [name]: value
         })
     }
 
-    submitHendler = (event) => {
+    submitHandler = (event) => {
         event.preventDefault();
         const {props: {sendDataToParent}, state: {name}} = this;
         sendDataToParent(name);
     }
 
     render() {
-        return(
-            <form onSubmit={this.submitHendler}>
+        return (
+            <form onSubmit={this.submitHandler}>
                 <input 
                 type="text"
                 placeholder="Type your name"
                 name="name"
                 value={this.state.name}
-                onChange={this.changeHendler}
+                onChange={this.changeHandler}
                 />
-                <button>Sent my name</button>
+                <button>Send my name</button>
             </form>
         )
     }

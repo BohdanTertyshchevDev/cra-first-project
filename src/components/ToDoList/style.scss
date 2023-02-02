@@ -7,7 +7,7 @@ $xl-size: 850px;
     flex-direction: column;
     justify-content: center;
     align-items: space-between;
-
+    
     &:hover {
         background-color: blue;
     }
@@ -34,16 +34,16 @@ $xl-size: 850px;
     color: $main-color;
     display: flex;
     font-size: 16px;
-
+    
     img {
         width: 200px;
         height: 300px;
     }
-
+    
     &:hover {
         background-color: blue;
     }
-
+    
     @media screen and (max-width: $xl-size) {
         & {
             color: grey;

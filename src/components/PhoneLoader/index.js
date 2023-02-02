@@ -32,15 +32,15 @@ class PhoneLoader extends Component {
             this.setState({
                 isLoading: false
             })
-        }) 
+        })
     }
+
     render() {
         const {phones, isLoading, isError} = this.state;
         return (
             <>
-            {isLoading && <div>Loading......</div>}
-            {isError && <div>Error!</div>}
-            
+            {isLoading && <div>Loading.....</div>}
+            {isError && <div>Error !</div>}
 
             <ul>
                 {phones.map((phone, index) => 

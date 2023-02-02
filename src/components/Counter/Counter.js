@@ -1,10 +1,10 @@
-import React from "react";
 
+import React from "react";
 
 class Counter extends React.Component {
     constructor(props) {
         super(props);
-        console.log("constructor");
+        console.log('constructor');
 
         this.state = {
             count: 0
@@ -26,31 +26,31 @@ class Counter extends React.Component {
 
     componentDidMount() {
         this.start()
-        console.log("componentDidMount");
+        console.log('componentDidMount');
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate");
+        console.log('componentDidUpdate');
     }
 
     shouldComponentUpdate() {
-        console.log("shouldComponentUpdate");
+        console.log('shouldComponentUpdate');
         return true;
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.intervalId);
-        console.log("I will die");
+        console.log('I will die');
     }
 
     render() {
-        console.log("render");
-        return(
-            <>
-                <h1 onClick={() => {this.setState({count: 1})}}>
-                    {this.state.count}
-                </h1>
-                <button>click</button>
+        console.log('render');
+        return (
+            <>           
+            <h1 onClick={()=>this.setState({count: 1})}>
+                {this.state.count}
+            </h1>
+            <button>Click</button>
             </>
         )
     }

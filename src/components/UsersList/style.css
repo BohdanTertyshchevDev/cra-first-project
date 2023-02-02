@@ -1,14 +1,14 @@
 input {
     width: 250px;
-    height: 30px;
+    height: 60px;
 }
 
 .card-wrapper {
-    width:  320px;
+    width: 320px;
     border: 1px solid black;
     display: flex;
-    flex-direction:  column;
-    justify-content:  center;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     margin: 10px;
 }

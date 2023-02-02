@@ -1,3 +1,4 @@
+// enum - переаховуваний тип
 
 const CONSTANTS = {
     THEMES: {

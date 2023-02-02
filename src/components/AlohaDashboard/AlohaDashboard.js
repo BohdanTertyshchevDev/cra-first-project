@@ -1,59 +1,71 @@
 import React from "react";
-import Aloha from "../Aloha/Aloha"; 
+import Aloha from "../Aloha/Aloha";
 
-
-class AlohaDashboard extends React.Component{
+class AlohaDashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userArray :[
+            usersArray: [
                 {
                     id: 1,
-                    firstName: "Tony",
-                    lastName: "Stark"
+                    firstName: 'Tony',
+                    lastName: 'Stark'
                 },
                 {
                     id: 2,
-                    firstName: "Druc",
-                    lastName: "Bener"
+                    firstName: 'Bruce',
+                    lastName: 'Brenner'
                 },
                 {
                     id: 3,
-                    firstName: "Peter",
-                    lastName: "Parker"
+                    firstName: 'Thor',
+                    lastName: 'Odinson'
+                },
+                {   
+                    id: 4,
+                    firstName: 'Peter',
+                    lastName: 'Parker'
+                },
+                {
+                    id: 5,
+                    firstName: 'Natasha',
+                    lastName: 'Romanof'
                 }
             ]
         }
     }
 
     userToAloha() {
-        const {userArray} =  this.state;
-        return userArray.map((user) => <Aloha key={user.id} name={user.firstName} lastName={user.lastName}/>)
+        const {usersArray} = this.state;
+        return usersArray.map((user) => <Aloha key={`${user.id}-${user.firstName}-${user.lastName}`} name={user.firstName} lastName={user.lastName} />)
     }
 
-    sortUser() {
-        const {userArray} =  this.state;
-        const newArray = [...userArray];
-        newArray.sort((a, b) =>{
+    sortUsers() {
+        const {usersArray} = this.state;
+
+        const newArray = [...usersArray];
+
+        newArray.sort((a,b) => {
             if(a.firstName > b.firstName) {
-                return 1;
+                return 1
             } else {
-                return -1;
+                return -1
             }
         });
+        
         this.setState({
-            userArray: newArray
+            usersArray: newArray
         })
     }
 
-    render() {
-        return(
-            <>
-                <button onClick={() => {this.sortUser()}}>Sort</button>
-                {this.userToAloha()}
-            </>
-        )
-    };
+  render() {
+    return (
+      <>
+        <button onClick={() => {this.sortUsers()}}>Sort</button>
+        {this.userToAloha()}
+      </>
+    );
+  }
 }
 
 export default AlohaDashboard;

@@ -32,19 +32,19 @@ class TVLoader extends Component {
             this.setState({
                 isLoading: false
             })
-        }) 
+        })
     }
+
     render() {
         const {tv, isLoading, isError} = this.state;
         return (
             <>
-            {isLoading && <div>Loading......</div>}
-            {isError && <div>Error!</div>}
-            
+            {isLoading && <div>Loading.....</div>}
+            {isError && <div>Error !</div>}
 
             <ul>
                 {tv.map((tv, index) => 
-                    <li key={index}>Акция!!!!{tv.brand} {tv.model}. Price: {tv.price}</li>
+                    <li key={index}>АКЦІЯ!!! {tv.brand} {tv.model}. Price: {tv.price}</li>
                 )}
             </ul>
             </>

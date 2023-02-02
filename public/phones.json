@@ -1,22 +1,27 @@
 [
     {
         "brand": "Huawei",
-        "model": "P Smart",
+        "model": "P Smart+",
         "price": "100$"
     },
     {
+        "brand": "Xiaomi",
+        "model": "Model263",
+        "price": "50$"
+    },
+    {
         "brand": "Samsung",
-        "model": "N458",
-        "price": "120$"
-    },
-    {
-        "brand": "Nokia",
-        "model": "4150",
-        "price": "500$"
-    },
-    {
-        "brand": "Redmi",
-        "model": "8note",
+        "model": "S1050",
         "price": "200$"
+    },
+    {
+        "brand": "Iphone",
+        "model": "12S",
+        "price": "5000$"
+    },
+    {
+        "brand": "Huawei",
+        "model": "P Smart+++++++",
+        "price": "1000$"
     }
 ]

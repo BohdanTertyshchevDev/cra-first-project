@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Child = (props) => {
-    return(
+    return (
         <>
-        {props.children}
+            {props.children}
         </>
-    )
+    );
 }
 
 export default Child;

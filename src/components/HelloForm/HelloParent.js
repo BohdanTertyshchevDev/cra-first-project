@@ -17,10 +17,10 @@ class HelloParent extends React.Component {
 
     render() {
         const {name} = this.state;
-        return(
+        return (
             <>
-            <HelloForm sendDataToParent = {this.getStateFromChild} />
-            {name ? <div>Hello, {name}</div> : <div>Введите свое имя в форму</div>}
+            <HelloForm sendDataToParent={this.getStateFromChild} />
+            {name ? <div>Hello, {name}</div> : <div>Введите свое имя в форму!</div>}
             </>
         )
     }

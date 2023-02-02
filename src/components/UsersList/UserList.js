@@ -1,9 +1,7 @@
 import React from "react";
-import {getUsers} from '../../api/'
-import UserCards from "./UserCards";
+import {getUsers} from '../../api/';
+import UserCard from "./UserCard";
 import './style.css'
-
-
 
 class UserList extends React.Component {
     constructor(props) {
@@ -29,24 +27,30 @@ class UserList extends React.Component {
         if(prevState.page !== page) {
             this.loadUsers(userCount, page);
         }
-
     }
 
-    handlSearch = (event) => {
+    handleSearch = (event) => {
+        // 1
+        // якщо в інпутику нічого немає, то чистимо масив відфільтрованих юзерів
         if(event.target.value === "") {
             this.setState({
-                filteredUsers:  []
+                filteredUsers: []
             })
             return;
         }
 
+        // 2
+        // Фільтруємо по прізвищу
+        const searchValue = event.target.value; 
         const filteredUsers = this.state.users.filter(
             (user) => 
-            {return user.name.last.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1}
-        )
+            {return user.name.last.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1}
+        );
 
+        // 3
+        // кладемо в стейт відфільтрованих юзерів
         this.setState({
-            filteredUsers
+            filteredUsers: filteredUsers
         })
     }
 
@@ -54,20 +58,19 @@ class UserList extends React.Component {
         this.setState({
             userCount: event.target.value
         })
-    } 
+    }
 
-    prevButtonHendler = () => {
+    prevBtnHandler = () => {
         this.setState({
             page: this.state.page > 1 ? this.state.page - 1 : this.state.page
         })
     }
 
-    nextButtonHendler = () => {
+    nextBtnHandler = () => {
         this.setState({
-            page: this.state.page + 1 
+            page: this.state.page + 1
         })
     }
-
 
     loadUsers = (userCount, page) => {
         getUsers(userCount, page).then((data) => {
@@ -89,45 +92,43 @@ class UserList extends React.Component {
         ;
     }
 
-
     renderUsers = () => {
         const {users, filteredUsers} = this.state;
-        return filteredUsers.length > 0
-        ? filteredUsers.map((user) => <UserCards key={user.login.uuid} users={user}/>)
-        : users.map((user) => <UserCards key={user.login.uuid} users={user}/>)
+        return filteredUsers.length > 0 
+        ? filteredUsers.map((user) => <UserCard key={user.login.uuid} user={user}/>) 
+        : users.map((user) => <UserCard key={user.login.uuid} user={user}/>)
     }
 
     render() {
         const {users, isError, isLoading} = this.state;
         return(
             <>
-            <ul>
+            
             <h1>USERS</h1>
-            <input
+
+            <input 
             type="number"
             min={1}
             max={100}
             onChange={this.setUserCount}
             />
             <button onClick={this.loadUsers}>Загрузить юзеров</button>
-            <input
+
+            <input 
             type="text"
             autoComplete="off"
             placeholder="Поиск юзера по фамилии"
-            onChange={this.handlSearch}
+            onChange={this.handleSearch}
             />
+            <button onClick={this.prevBtnHandler}>Previous page</button>
+            <button onClick={this.nextBtnHandler}>Next page</button>
 
-            <button onClick={this.prevButtonHendler}>Previous page</button>
-            <button onClick={this.nextButtonHendler}>Next page</button>
-
-
-            {isError && <h2>Произошла ошибка</h2>}
-            {isLoading && <h2>Пользователи еще не загрузились</h2>}
-
+            {isError && <h2>Произошла ошибка!</h2>}
+            {isLoading && <h2>Пользователи еще не загрузились!</h2>}
             <section className="card-container">
                 {users.length ? this.renderUsers() : null}
             </section>
-            </ul>
+            
             </>
         )
     }

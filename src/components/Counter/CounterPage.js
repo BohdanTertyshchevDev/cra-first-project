@@ -13,7 +13,11 @@ class CounterPage extends React.Component {
     render() {
         return (
             <>
-            <button onClick={() => {this.setState({mount: !this.state.mount})}}>unmount</button>
+            <button 
+            onClick={() => {this.setState({mount: !this.state.mount})}}>
+                Unmount
+            </button>
+            
             {this.state.mount ? <Counter /> : null}
             </>
         )

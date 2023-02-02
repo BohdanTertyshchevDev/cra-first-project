@@ -3,16 +3,19 @@ import React, { Component } from 'react';
 import styles from './ToDoFormStyle.module.css';
 import cx from 'classnames';
 
+
 class ToDoForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           todo: '' ,
-           isInputValid: true
+            // 3. Нам потрібен стейт
+            todo: '',
+            isInputValid: true
         }
     }
-
-    changeHendler = ({target: {value, name}}) => {
+    
+    // 2. onChange : input -> state
+    changeHandler = ({target: {value, name}}) => {
         if(value.includes('*')) {
             this.setState({
                 isInputValid: false
@@ -25,29 +28,34 @@ class ToDoForm extends Component {
         }
     }
 
-    submitHendler = (event) =>{
+    submitHandler = (event) => {
         event.preventDefault();
         this.props.sendData(this.state.todo);
     }
-    
+
     render() {
         const {todo, isInputValid} = this.state;
 
         const cNameString = cx({
             [styles.input]: true,
-            [styles['invalid-input']]:!isInputValid
+            [styles['invalid-input']]: !isInputValid
         })
+
         // const className = styles['input'] + ' ' + (isInputValid ? '' : styles['invalid-input']);
         return (
-            <form onSubmit={this.submitHendler} className={styles.container}>
-                <input 
-                type="text" 
-                name="todo" 
+            <form onSubmit={this.submitHandler} className={styles.container}>
+                <input
+                type="text"
+                name="todo"
                 value={todo}
-                onChange={this.changeHendler}
+                onChange={this.changeHandler}
                 className={cNameString}
                 />
                 <button type="submit">Submit</button>
+                {/* 
+                1. Маємо бути інпут
+                state -> input.value
+                */}
             </form>
         );
     }
@@ -55,4 +63,6 @@ class ToDoForm extends Component {
 
 export default ToDoForm;
 
+
+// [name].module.css
 
