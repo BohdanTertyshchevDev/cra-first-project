@@ -1,12 +1,12 @@
 import React from "react";
-import NewCounter from "./NewCounter";
-import Counter from "./NewCounter/counter";
+import MouseTracker from "./MouseTracker";
+
 
 
 class App extends React.Component {
   render() {
     return (
-      <Counter/>
+      <MouseTracker/>
     );
   }
 }
