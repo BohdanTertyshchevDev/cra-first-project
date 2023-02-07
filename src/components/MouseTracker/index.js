@@ -3,7 +3,8 @@ import React, {useState, useEffect} from 'react';
 const MouseTracker = (props) => {
     const [coorditanes, setCoordinates] = useState({
         x: 0,
-        y: 0
+        y: 0,
+        counter: 0
     })
 
     useEffect(() => {
@@ -14,18 +15,31 @@ const MouseTracker = (props) => {
     }, []);
 
     const tracker = (event) => {
-        setCoordinates({
+        setCoordinates((prevState) => {
+            return {
+                ...prevState,
             x: event.clientX,
             y: event.clientY
+            }
         })
     }
 
-    
+
+
+    const clickHandler = () => {
+        setCoordinates((prevState) => {
+            return {
+                ...prevState,
+                counter: prevState.counter+1
+            }
+        })
+    }
 
     return (
-        <div>
+        <div onClick={clickHandler}>
             <p>X: {coorditanes.x}</p>
             <p>Y: {coorditanes.y}</p>
+            <p>counter: {coorditanes.counter}</p>
         </div>
     );
 }
