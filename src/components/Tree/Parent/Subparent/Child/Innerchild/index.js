@@ -1,21 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import { UserContext } from "../../../../../../contexts/userContext";
 
 const Innerchild = () => {
+  const {user, logOut} = useContext(UserContext);
   return (
-    <UserContext.Consumer>
-      {({ user, logOut }) => {
-        return (
-          <>
-            <div style={{ border: "3px solid black", padding: "25px" }}>
+    <div style={{ border: "3px solid black", padding: "25px" }}>
               <p>InnerChild</p>
               <p>{JSON.stringify(user)}</p>
               <button onClick={logOut}>Logout</button>
             </div>
-          </>
-        );
-      }}
-    </UserContext.Consumer>
   );
 };
 
