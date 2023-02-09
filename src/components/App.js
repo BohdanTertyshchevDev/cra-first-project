@@ -1,11 +1,12 @@
 import React from "react";
-import Counter from "./Counter/CounterPage";
+import Clicker from "./SendBoxComponent";
+
 
 
 class App extends React.Component {
   render() {
     return (
-      <Counter/>
+      <Clicker/>
     );
   }
 }
