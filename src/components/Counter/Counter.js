@@ -1,59 +1,42 @@
+import React, {useState, useEffect} from "react";
+import {format, addSeconds} from "date-fns";
 
-import React from "react";
 
-class Counter extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log('constructor');
+function Counter(props) {
+    const [time, setTime] = useState(new Date(0, 0, 0, 0, 0, 0, 0));
+    const [isRunning, setRunning] = useState(true);
 
-        this.state = {
-            count: 0
+    let intervalId = null;
+   
+    useEffect(() => {
+        if(isRunning) {
+            intervalId = setInterval(() => {
+                setTime(time => addSeconds(time, 1))
+            }, 1000);
         }
+        
 
-        this.intervalId = null;
+        return() => {
+            clearInterval(intervalId);
+        }
+    }, [isRunning]);
+
+    const switchRunning = () => {
+        setRunning(!isRunning);
     }
 
-    start = () => {
-        this.intervalId = setInterval(() => {
-            const {count} = this.state;
 
-            this.setState({
-                count: count+1
-            })
-        }, 1000)
-        console.log(this.intervalId);
-    }
-
-    componentDidMount() {
-        this.start()
-        console.log('componentDidMount');
-    }
-
-    componentDidUpdate() {
-        console.log('componentDidUpdate');
-    }
-
-    shouldComponentUpdate() {
-        console.log('shouldComponentUpdate');
-        return true;
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.intervalId);
-        console.log('I will die');
-    }
-
-    render() {
-        console.log('render');
+    
         return (
             <>           
-            <h1 onClick={()=>this.setState({count: 1})}>
-                {this.state.count}
+            <h1>
+                {format(time, 'HH:mm:ss')}
             </h1>
-            <button>Click</button>
+            <button onClick={switchRunning}>
+                {isRunning ? "Stop" : "Start"}
+            </button>
             </>
         )
-    }
 }
 
 export default Counter;
