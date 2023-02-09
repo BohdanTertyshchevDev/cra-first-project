@@ -18,12 +18,19 @@ class App extends React.Component {
       }
     }
   }
+
+  setTheme = (theme) => {
+    this.setState({
+      theme
+    })
+  }
+
   
   render() {
     const {user, theme} = this.state;
     return (
       <UserContext.Provider value={{user}}>
-        <ThemeContext.Provider value={[theme, () => {}]}>
+        <ThemeContext.Provider value={[theme, this.setTheme]}>
           <Tree/>
         </ThemeContext.Provider>
       </UserContext.Provider>
