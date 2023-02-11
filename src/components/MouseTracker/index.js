@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
-const MouseTracker = (props) => {
+const useMouseTracker = (props) => {
     const [coorditanes, setCoordinates] = useState({
         x: 0,
         y: 0,
-        counter: 0
     })
 
-    const [counter, setCounter] = useState(0);
+    
 
     useEffect(() => {
         window.addEventListener('mousemove', tracker);
@@ -23,19 +22,8 @@ const MouseTracker = (props) => {
         })
     }
 
-
-
-    const clickHandler = () => {
-        setCounter(counter + 1);
-    }
-
-    return (
-        <div onClick={clickHandler}>
-            <p>X: {coorditanes.x}</p>
-            <p>Y: {coorditanes.y}</p>
-            <p>counter: {counter}</p>
-        </div>
-    );
+   
+    return {coorditanes};
 }
 
-export default MouseTracker;
+export default useMouseTracker;
