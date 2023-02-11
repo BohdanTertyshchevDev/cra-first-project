@@ -1,12 +1,10 @@
 import React from "react";
-import Clicker from "./SendBoxComponent";
-
-
+import PhoneLoader from "./PhoneLoader";
 
 class App extends React.Component {
   render() {
     return (
-      <Clicker/>
+      <PhoneLoader/>
     );
   }
 }

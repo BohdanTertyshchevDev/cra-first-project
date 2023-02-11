@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 
 /*
 1. Компонента йде за даними
@@ -6,43 +6,44 @@ import React, { Component } from 'react';
 3. Компонента ділиться даними з кимось іншим, хто знає, як треба відобразити ці дані
 */
 
-class DataProvider extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            data: [],
-            isLoading: true,
-            isError: false
-        }
-    }
-
-    componentDidMount() {
-        this.load();
-    }
-
-    load = () => {
-        this.props.loadData()
+export function useData(loadData) {
+    const [data, setData] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        loadData()
         .then((data) => {
-            this.setState({
-                data
-            })
+            setData(data)
         })
-        .catch((error) => {
-            this.setState({
-                isError: true
-            })
+        .catch((e) => {
+            setError(error);
         })
         .finally(() => {
-            this.setState({
-                isLoading: false
-            })
+            setLoading(false);
         })
-    }
+    }, [])
 
-    render() {
-        return this.props.children(this.state)
-    }
+    // load = () => {
+    //     this.props.loadData()
+    //     .then((data) => {
+    //         this.setState({
+    //             data
+    //         })
+    //     })
+    //     .catch((error) => {
+    //         this.setState({
+    //             isError: true
+    //         })
+    //     })
+    //     .finally(() => {
+    //         this.setState({
+    //             isLoading: false
+    //         })
+    //     })
+    // }
+
+    return{data, error, isLoading}
 }
 
-export default DataProvider;
+

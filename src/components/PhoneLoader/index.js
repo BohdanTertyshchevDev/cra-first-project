@@ -1,55 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useData } from '../DataProvider'; 
 
-class PhoneLoader extends Component {
-    constructor(props) {
-        super(props);
+function PhoneLoader(props) {
 
-        this.state = {
-            phones: [],
-            isLoading: true,
-            isError: false
-        }
+    const {data, error, isLoading} = useData(getPhones);
+
+    function getPhones() {
+        return fetch('./phones.json')
+        .then ((response) => response.json())
     }
 
-    componentDidMount() {
-        this.load();
-    }
-
-    load = () => {
-        fetch('./phones.json')
-        .then((response) => response.json())
-        .then((phones) => {
-            this.setState({
-                phones
-            })
-        })
-        .catch((error) => {
-            this.setState({
-                isError: true
-            })
-        })
-        .finally(() => {
-            this.setState({
-                isLoading: false
-            })
-        })
-    }
-
-    render() {
-        const {phones, isLoading, isError} = this.state;
+   
         return (
             <>
             {isLoading && <div>Loading.....</div>}
-            {isError && <div>Error !</div>}
+            {error && <div>Error !</div>}
 
             <ul>
-                {phones.map((phone, index) => 
+                {data && data.map((phone, index) => 
                     <li key={index}>{phone.brand} {phone.model}. Price: {phone.price}</li>
                 )}
             </ul>
             </>
         );
-    }
 }
 
 export default PhoneLoader;
