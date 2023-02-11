@@ -1,43 +1,41 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
+import { reducer } from "../../reducers";
+import CONSTANTS from "../../constants";
+const {ACTIONS} = CONSTANTS;
 
-function reducer(state, action) {
-    switch(action.type) {
-        case 'CLICK_INCREMENT': {
-            return {
-                ...state,
-                click: state.click + 1
-            }
-        }
-        default: return state;
-    }
-}
+
 
 const initialState = {
-    click: 0
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    address: ''
 }
 
 function SignOutForm (props) {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const clicker = () => {
-        dispatch({
-            type: 'CLICK_INCREMENT'
-        })
-    }
+   const changeHandler = ({target: {value, name}}) => {
+    dispatch({
+        type: ACTIONS.INPUT_CHANGE,
+        name,
+        value
+    })
+   } 
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [address, setAddress] = useState('');
+    const {firstName, lastName, email, password, address} = state;
   
 
     return (
-       <>
-       {state.click}
-       <button onClick={clicker}>Click to increment</button>
-       </>
+        <form>
+            <input type='text' name="firstName" value={firstName} onChange={changeHandler}/>
+            <input type='text' name="lastName" value={lastName} onChange={changeHandler}/>
+            <input type='text' name="email" value={email} onChange={changeHandler}/>
+            <input type='text' name="password" value={password} onChange={changeHandler}/>
+            <input type='text' name="address" value={address}  onChange={changeHandler}/>
+        </form>
     )
 }
 
